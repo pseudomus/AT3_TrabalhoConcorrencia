@@ -62,4 +62,21 @@ public class Hotel {
             lock.unlock();
         }
     }
+
+    public void limparQuarto() throws InterruptedException {
+        lock.lock();
+        try {
+            for (Quarto quarto : quartos) {
+                if (quarto.isDisponivel() && Quarto.estaLimpo == false) {
+                    // Simula tempo para limpeza
+                    Thread.sleep(new Random().nextInt(5000));
+                    System.out.println("Camareira está limpando o quarto " + quarto.getNumero());
+                    Quarto.estaLimpo = true;
+                    break;
+                }
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
 }
