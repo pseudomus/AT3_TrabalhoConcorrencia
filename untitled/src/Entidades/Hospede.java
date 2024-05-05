@@ -12,4 +12,16 @@ public class Hospede extends Thread {
         this.id = id;
         this.hotel = hotel;
     }
+
+    @Override
+    public void run() {
+        System.out.println("Hóspede " + id + " chegou ao hotel.");
+        try {
+            hotel.alocarQuarto(this);
+            Thread.sleep(new Random().nextInt(5000));
+            hotel.sair(this);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
