@@ -79,4 +79,28 @@ public class Hotel {
             lock.unlock();
         }
     }
+
+    public void receberHospede() throws InterruptedException {
+        lock.lock();
+        try {
+            if (!filaEspera.isEmpty()) {
+                Quarto quartoDisponivel = null;
+                for (Quarto quarto : quartos) {
+                    if (quarto.isDisponivel() && Quarto.estaLimpo == true) {
+                        quartoDisponivel = quarto;
+                        break;
+                    }
+                }
+                if (quartoDisponivel != null) {
+                    quartoDisponivel.ocupar(filaEspera.get(0));
+                    hospedesNoHotel.add(filaEspera.get(0));
+//                    filaEspera.get(0).setHospedado(true);
+                    System.out.println("Hóspede " + filaEspera.get(0).getId() + " da fila de espera alocado no quarto " + quartoDisponivel.getNumero());
+                    filaEspera.remove(0);
+                }
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
 }
