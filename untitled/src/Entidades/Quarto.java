@@ -19,4 +19,31 @@ public class Quarto {
 
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void ocupar(Hospede hospede) {
+        lock.lock();
+        try {
+            this.hospede = hospede;
+            this.disponivel = false;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void desocupar() {
+        lock.lock();
+        try {
+            this.hospede = null;
+            this.disponivel = true;
+        } finally {
+            lock.unlock();
+        }
+    }
 }
