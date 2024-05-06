@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Main {
     public static void main(String[] args) {
         final int NUM_QUARTOS = 10;
-        final int NUM_HOSPEDES = 15;
+        final int NUM_HOSPEDES = 50;
         final int NUM_CAMAREIRAS = 10;
         final int NUM_RECEPCIONISTAS = 5;
 
