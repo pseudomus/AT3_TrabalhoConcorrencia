@@ -4,11 +4,21 @@ import java.util.Random;
 
 public class Recepcionista extends Thread {
     private final int id;
+    private boolean isFree;
     private final Hotel hotel;
 
     public Recepcionista(int id, Hotel hotel) {
         this.id = id;
         this.hotel = hotel;
+        this.isFree = true;
+    }
+
+    public boolean getIsFree(){
+        return this.isFree;
+    }
+
+    public void setIsFree(boolean isFree){
+        this.isFree = isFree;
     }
 
     @Override

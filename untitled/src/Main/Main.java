@@ -13,7 +13,7 @@ public class Main {
         final int NUM_CAMAREIRAS = 10;
         final int NUM_RECEPCIONISTAS = 5;
 
-        Hotel hotel = new Hotel(NUM_QUARTOS);
+        Hotel hotel = new Hotel();
 
         // Criando recepcionistas
         for (int i = 0; i < NUM_RECEPCIONISTAS; i++) {

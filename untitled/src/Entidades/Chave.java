@@ -1,2 +1,4 @@
-package Entidades;public class Chave {
+package Entidades;
+
+public class Chave {
 }
