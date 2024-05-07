@@ -74,13 +74,37 @@ public class Hospede extends Thread {
 
     @Override
     public void run() {
+        Recepcionista recepcionista = hotel.getRecepcionista();
         System.out.println("Hóspede " + id + " chegou ao hotel.");
-        try {
-            hotel.alocarQuarto(this);
-            Thread.sleep(new Random().nextInt(5000));
-            hotel.sair(this);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        if (recepcionista != null && tentativasReclamacao > 0) {
+            while (tentativasReclamacao > 0) {
+                recepcionista.alocarQuarto(this);
+                if (this.chave != null) {
+                    try {
+                        sairDoHotel(recepcionista);
+                        Thread.sleep(4000);
+                        if (!quarto.getBeingCleaned()) {
+                            retornarProQuarto(recepcionista.devolverChave(quarto.getNumero()));
+                        }
+                        Thread.sleep(4000);
+                        sairDoHotel(recepcionista);
+                        break;
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    tentativasReclamacao--;
+                }
+            }
+            if (tentativasReclamacao == 0) {
+            }
+    }
+//        try {
+//            hotel.alocarQuarto(this);
+//            Thread.sleep(new Random().nextInt(5000));
+//            hotel.sair(this);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }
