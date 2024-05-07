@@ -30,7 +30,6 @@ public class Quarto {
     }
 
     void setTemAChave(boolean estado) {
-        this.TemAChave() = estado;
     }
 
     public void setBeingCleaned(boolean beingCleaned) {
