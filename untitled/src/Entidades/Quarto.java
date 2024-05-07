@@ -12,6 +12,7 @@ public class Quarto {
     private boolean beingCleaned;
     public  boolean estaLimpo;
     public Hospede hospede = null;
+    public  Chave chave;
 
 
     public Quarto(int numero, int capacidade) {
@@ -21,6 +22,15 @@ public class Quarto {
         this.disponivel = true;
         this.estaLimpo = true;
         this.beingCleaned = false;
+        chave = new Chave();
+    }
+
+    boolean TemAChave(){
+        return this.TemAChave();
+    }
+
+    void setTemAChave(boolean estado) {
+        this.TemAChave() = estado;
     }
 
     public void setBeingCleaned(boolean beingCleaned) {
@@ -55,6 +65,10 @@ public class Quarto {
         return this.hasKey;
      }
 
+     public Chave getChave() {
+        return chave;
+     }
+
     public void ocupar(Hospede hospede) {
         lock.lock();
         try {
@@ -63,8 +77,8 @@ public class Quarto {
         } finally {
             lock.unlock();
         }
+        hasKey = true;
     }
-
     public void desocupar() {
         lock.lock();
         try {
