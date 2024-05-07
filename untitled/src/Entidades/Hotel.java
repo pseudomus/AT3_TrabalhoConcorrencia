@@ -138,8 +138,10 @@ public class Hotel {
     }
 
     public void adicionarEspera(Hospede hospede){
-        System.out.println("Não há quartos disponíveis. O hóspede " + hospede.getId() + " está na fila de espera.");
-        this.filaEspera.add(hospede);
+        if(!this.filaEspera.contains(hospede)) {
+            System.out.println("Não há quartos disponíveis. O hóspede " + hospede.getId() + " está na fila de espera.");
+            this.filaEspera.add(hospede);
+        }
     }
 
     public void removerHospede(Hospede hospede){

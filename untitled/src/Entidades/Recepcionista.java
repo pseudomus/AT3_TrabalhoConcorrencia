@@ -43,7 +43,6 @@ public class Recepcionista extends Thread {
                 } else {
                     hospede.decrementarTentativas();
                     hotel.adicionarEspera(hospede);
-                    System.out.println("não tem quartos livres no hotel");
                 }
             }
         }finally {
