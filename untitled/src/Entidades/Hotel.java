@@ -83,7 +83,7 @@ public class Hotel {
         lock.lock();
         try{
             for(Camareira camareira: camareiras){
-                if(camareira.getisCleaning()){
+                if(!camareira.getisCleaning()){
                     return camareira;
                 }
             }
