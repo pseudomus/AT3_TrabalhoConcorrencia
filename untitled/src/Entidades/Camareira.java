@@ -57,7 +57,7 @@ public class Camareira extends Thread{
         System.out.println("Camareira " + id + " iniciou o turno.");
         while (true) {
             try {
-                hotel.limparQuarto();
+                this.limparOQuarto();
                 Thread.sleep(new Random().nextInt(5000)); // Simulando tempo de limpeza
             } catch (InterruptedException e) {
                 e.printStackTrace();
