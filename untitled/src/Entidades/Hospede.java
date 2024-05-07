@@ -1,5 +1,11 @@
 package Entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Hospede extends Thread {
     private final int id;
     private final Hotel hotel;
@@ -96,13 +102,6 @@ public class Hospede extends Thread {
             }
             if (tentativasReclamacao == 0) {
             }
-    }
-//        try {
-//            hotel.alocarQuarto(this);
-//            Thread.sleep(new Random().nextInt(5000));
-//            hotel.sair(this);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        }
     }
 }
