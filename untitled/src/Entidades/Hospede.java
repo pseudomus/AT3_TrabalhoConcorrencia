@@ -36,6 +36,9 @@ public class Hospede extends Thread {
 
     public void decrementarTentativas() {
         tentativasReclamacao--;
+        if(tentativasReclamacao == 0){
+            reclamar();
+        }
     }
 
     public Thread getThread() {
@@ -57,6 +60,7 @@ public class Hospede extends Thread {
         entregarChaveRecepcao(recepcionista);
         hotel.removerHospede(this);
         quarto.setEstaLimpo(false);
+        quarto.setDisponivel(true);
         Camareira camareira = hotel.getCamareira();
         System.out.println(this.getId() + " deixando o Hotel");
         camareira.limparOQuarto();

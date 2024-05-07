@@ -35,10 +35,11 @@ public class Recepcionista extends Thread {
             if(hospede.getTentativas() > 0) {
                 Quarto quarto = hotel.getQuartoLivre();
                 if (quarto != null) {
-                    System.out.println("Hospede " + hospede.getId() + "colocado no quarto " + quarto.getNumero());
+                    System.out.println("Hospede " + hospede.getId() + " colocado no quarto " + quarto.getNumero());
                     quarto.ocupar(hospede);
                     hospede.setChave(quarto.getChave());
                     hospede.setQuarto(quarto);
+                    hotel.getFilaEspera().remove(hospede);
                 } else {
                     hospede.decrementarTentativas();
                     hotel.adicionarEspera(hospede);
@@ -53,9 +54,9 @@ public class Recepcionista extends Thread {
     public void chamarEspera(){
         try{
             if(lock.tryLock(5, TimeUnit.SECONDS)){
-                Hospede hospede = hotel.getFilaEspera().get(0);
+                int rnd = new Random().nextInt(hotel.getFilaEspera().size());
+                Hospede hospede = hotel.getFilaEspera().get(rnd);
                 if(hospede != null) {
-                    hotel.getFilaEspera().remove(0);
                     alocarQuarto(hospede);
                 }
             }
@@ -69,14 +70,19 @@ public class Recepcionista extends Thread {
     }
 
     public Chave devolverChave(int numeroQuarto){
-        List<Chave> chaves = hotel.getChaves();
-        for(Chave chave: chaves){
-            if(chave.getIdChave() == numeroQuarto){
-                chaves.remove(chave);
-                return chave;
+        lock.lock();
+        try {
+            List<Chave> chaves = hotel.getChaves();
+            for (Chave chave : chaves) {
+                if (chave.getIdChave() == numeroQuarto) {
+                    chaves.remove(chave);
+                    return chave;
+                }
             }
+            return null;
+        }finally {
+            lock.unlock();
         }
-        return null;
     }
 
     @Override

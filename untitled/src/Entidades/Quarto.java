@@ -28,6 +28,10 @@ public class Quarto {
         chave = new Chave(this);
     }
 
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
     public void setBeingCleaned(boolean beingCleaned) {
         this.beingCleaned = beingCleaned;
     }
