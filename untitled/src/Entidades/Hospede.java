@@ -1,9 +1,8 @@
 package Entidades;
 
-import javax.swing.*;
 import java.util.Random;
 
-public class Hospede extends Thread implements Runnable{
+public class Hospede extends Thread {
     private final int id;
     private final Hotel hotel;
     private Quarto quarto;
@@ -42,6 +41,35 @@ public class Hospede extends Thread implements Runnable{
     public void reclamar() {
         System.out.println(this.getId() + ": O Hotel não tem quartos disponíveis. Péssimo, não voltarei!");
         Thread.currentThread().interrupt();
+    }
+
+    public void entregarChaveRecepcao(Recepcionista recepcionista){
+        recepcionista.adicionarChave(chave);
+        this.chave = null;
+        quarto.setHaveKey(false);
+    }
+
+    public void sairDoHotel(Recepcionista recepcionista) {
+        entregarChaveRecepcao(recepcionista);
+        hotel.removerHospede(this);
+        System.out.println(this.getId() + " deixando o Hotel");
+    }
+
+    public void sairPassear(Recepcionista recepcionista) {
+        entregarChaveRecepcao(recepcionista);
+        System.out.println(this.getId() + " saiu para passear");
+//        Camareira camareira = hotel.camareiraDisponivel();
+//        camareira.limparQuarto();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void retornarProQuarto(Chave chave) {
+        this.chave = chave;
+        System.out.println(this.getId() + " voltando pro quarto");
     }
 
     @Override
