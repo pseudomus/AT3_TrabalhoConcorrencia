@@ -9,7 +9,7 @@ public class Camareira extends Thread{
     private final int id;
     private boolean isCleaning;
     private final Hotel hotel;
-    private boolean isAvilible = true;
+    private boolean isAvailable = true;
     private Quarto beingCleaned;
     private Lock lock;
 
@@ -17,6 +17,7 @@ public class Camareira extends Thread{
         this.id = id;
         this.hotel = hotel;
         this.isCleaning = false;
+        this.lock = new ReentrantLock();
     }
 
     public boolean getisCleaning(){
@@ -27,13 +28,13 @@ public class Camareira extends Thread{
         this.isCleaning = isCleaning;
     }
 
-    public void setAvilible() {
-        this.isAvilible = !isAvilible;
+    public void setAvailable() {
+        this.isAvailable = !isAvailable;
     }
 
-    public void liparOQuarto() {
+    public void limparOQuarto() {
         lock.lock();
-        setAvilible();
+        setAvailable();
         this.beingCleaned = hotel.getQuartoSujo();
         try {
             if (beingCleaned != null) {
@@ -42,7 +43,7 @@ public class Camareira extends Thread{
                 Thread.sleep(2000);
                 System.out.println("Quarto " + beingCleaned.getNumero() + " limpo.");
                 beingCleaned.setEstaLimpo(false);
-                setAvilible();
+                setAvailable();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

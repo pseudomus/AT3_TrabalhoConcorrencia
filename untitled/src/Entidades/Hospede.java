@@ -1,7 +1,5 @@
 package Entidades;
 
-import java.util.Random;
-
 public class Hospede extends Thread {
     private final int id;
     private final Hotel hotel;
@@ -58,8 +56,8 @@ public class Hospede extends Thread {
     public void sairPassear(Recepcionista recepcionista) {
         entregarChaveRecepcao(recepcionista);
         System.out.println(this.getId() + " saiu para passear");
-//        Camareira camareira = hotel.camareiraDisponivel();
-//        camareira.limparQuarto();
+        Camareira camareira = hotel.getCamareira();
+        camareira.limparOQuarto();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -81,7 +79,7 @@ public class Hospede extends Thread {
                 recepcionista.alocarQuarto(this);
                 if (this.chave != null) {
                     try {
-                        sairDoHotel(recepcionista);
+                        sairPassear(recepcionista);
                         Thread.sleep(4000);
                         if (!quarto.getBeingCleaned()) {
                             retornarProQuarto(recepcionista.devolverChave(quarto.getNumero()));

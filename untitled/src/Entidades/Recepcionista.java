@@ -35,7 +35,7 @@ public class Recepcionista extends Thread {
             if(hospede.getTentativas() > 0) {
                 Quarto quarto = hotel.getQuartoLivre();
                 if (quarto != null) {
-                    System.out.println("Hospede" + hospede.getId() + "colocado no quarto" + quarto.getNumero());
+                    System.out.println("Hospede " + hospede.getId() + "colocado no quarto " + quarto.getNumero());
                     quarto.ocupar(hospede);
                     hospede.setChave(quarto.getChave());
                     hospede.setQuarto(quarto);
