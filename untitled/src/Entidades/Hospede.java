@@ -50,19 +50,23 @@ public class Hospede extends Thread {
     public void entregarChaveRecepcao(Recepcionista recepcionista){
         recepcionista.adicionarChave(chave);
         this.chave = null;
-        quarto.setHaveKey(false);
+        quarto.setHaveKey(true);
     }
 
     public void sairDoHotel(Recepcionista recepcionista) {
         entregarChaveRecepcao(recepcionista);
         hotel.removerHospede(this);
+        quarto.setEstaLimpo(false);
+        Camareira camareira = hotel.getCamareira();
         System.out.println(this.getId() + " deixando o Hotel");
+        camareira.limparOQuarto();
     }
 
     public void sairPassear(Recepcionista recepcionista) {
         entregarChaveRecepcao(recepcionista);
         System.out.println(this.getId() + " saiu para passear");
         Camareira camareira = hotel.getCamareira();
+        quarto.setEstaLimpo(false);
         camareira.limparOQuarto();
         try {
             Thread.sleep(5000);

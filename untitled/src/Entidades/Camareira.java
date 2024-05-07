@@ -40,11 +40,11 @@ public class Camareira extends Thread{
         try {
             if (beingCleaned != null) {
                 beingCleaned.setBeingCleaned(true);
-                System.out.println(getName() + ": O quarta começou a ser limpo" + beingCleaned.getNumero());
+                System.out.println("O quarta começou a ser limpo " + beingCleaned.getNumero());
                 Thread.sleep(2000);
                 System.out.println("Quarto " + beingCleaned.getNumero() + " limpo.");
-                beingCleaned.setEstaLimpo(false);
                 setAvailable();
+                beingCleaned.setBeingCleaned(false);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

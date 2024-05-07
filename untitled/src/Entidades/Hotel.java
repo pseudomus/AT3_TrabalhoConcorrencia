@@ -126,6 +126,8 @@ public class Hotel {
         try {
             for (Quarto quarto : quartos) {
                 if (quarto.getHasKey() && !quarto.getEstaLimpo()){
+                    quarto.setEstaLimpo(true);
+                    quarto.setHaveKey(false);
                     return quarto;
                 }
             }

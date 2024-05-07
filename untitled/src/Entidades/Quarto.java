@@ -72,7 +72,7 @@ public class Quarto {
         } finally {
             lock.unlock();
         }
-        hasKey = true;
+        hasKey = false;
     }
     public void desocupar() {
         lock.lock();
