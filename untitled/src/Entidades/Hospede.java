@@ -3,7 +3,7 @@ package Entidades;
 import javax.swing.*;
 import java.util.Random;
 
-public class Hospede extends Thread {
+public class Hospede extends Thread implements Runnable{
     private final int id;
     private final Hotel hotel;
     private Quarto quarto;
@@ -33,6 +33,10 @@ public class Hospede extends Thread {
 
     public void decrementarTentativas() {
         tentativasReclamacao--;
+    }
+
+    public Thread getThread() {
+        return thread;
     }
 
     public void reclamar() {
