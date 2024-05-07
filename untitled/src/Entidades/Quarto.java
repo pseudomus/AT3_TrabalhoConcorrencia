@@ -22,14 +22,7 @@ public class Quarto {
         this.disponivel = true;
         this.estaLimpo = true;
         this.beingCleaned = false;
-        chave = new Chave();
-    }
-
-    boolean TemAChave(){
-        return this.TemAChave();
-    }
-
-    void setTemAChave(boolean estado) {
+        chave = new Chave(this);
     }
 
     public void setBeingCleaned(boolean beingCleaned) {
